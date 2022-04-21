@@ -1,4 +1,4 @@
-*ripgrep.txt*	Manage ripgrep in Neovim/Vim
+*ripgrep.txt* wrap plugin fro ripgrep
 
 Author: skanehira <sho19921005@gmail.com>
 License : MIT license  {{{
