@@ -9,7 +9,6 @@ export async function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
     async grep(...arg: unknown[]): Promise<void> {
       const cmd = ["rg", "--vimgrep"].concat(ensureArray(arg));
-      console.log(cmd);
       const opts = {
         cmd: cmd,
         stderr: "piped",
