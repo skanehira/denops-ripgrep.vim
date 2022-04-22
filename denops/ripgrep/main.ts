@@ -1,28 +1,14 @@
-import { Denops, ensureString, io } from "./deps.ts";
-
-type QFList = {
-  filename: string;
-  lnum: number;
-  col: number;
-  text: string;
-};
-
-async function addloclist(denops: Denops, qflist: QFList[]) {
-  await denops.call("setloclist", 0, qflist, "a");
-}
-
-async function clearloclist(denops: Denops) {
-  await denops.call("setloclist", 0, [], "r");
-}
+import { Denops, ensureArray, io } from "./deps.ts";
+import { addloclist, clearloclist, QFList } from "./utils.ts";
 
 export async function main(denops: Denops): Promise<void> {
   await denops.cmd(
-    `command! -nargs=+ Ripgrep call denops#notify("${denops.name}", "grep", [<q-args>])`,
+    `command! -nargs=+ Ripgrep call denops#notify("${denops.name}", "grep", [<f-args>])`,
   );
 
   denops.dispatcher = {
-    async grep(arg: unknown): Promise<void> {
-      const cmd = ["rg", "--vimgrep"].concat(ensureString(arg).split(" "));
+    async grep(...arg: unknown[]): Promise<void> {
+      const cmd = ["rg", "--vimgrep"].concat(ensureArray(arg));
       console.log(cmd);
       const opts = {
         cmd: cmd,
