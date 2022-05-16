@@ -3,7 +3,7 @@ import { addloclist, clearloclist, QFList } from "./utils.ts";
 
 export async function main(denops: Denops): Promise<void> {
   await denops.cmd(
-    `command! -nargs=+ Ripgrep call denops#notify("${denops.name}", "grep", [<f-args>])`,
+    `command! -nargs=+ -complete=file Ripgrep call denops#notify("${denops.name}", "grep", [<f-args>])`,
   );
 
   denops.dispatcher = {
